@@ -531,9 +531,8 @@ h1, h2, h3, h4 {
 .nmls-note { margin-top: 30px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #9a968b; }
 
 /* Timeline (30 days) */
-.timeline-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 60px; }
-@media (max-width: 900px) { .timeline-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 540px) { .timeline-grid { grid-template-columns: 1fr; } }
+.timeline-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px; margin-top: 60px; max-width: 900px; }
+@media (max-width: 640px) { .timeline-grid { grid-template-columns: 1fr; } }
 .tl-week { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
 .tl-rule { width: 26px; height: 1px; background: var(--gold-dim); margin-bottom: 18px; }
 .timeline-grid h4 { font-size: 19px; color: var(--white); font-weight: 500; margin-bottom: 12px; }
@@ -605,8 +604,10 @@ h1, h2, h3, h4 {
   grid-template-columns: 1fr 1fr;
   gap: 70px;
   align-items: start;
+  min-width: 0;
 }
 @media (max-width: 980px) { .cta-grid { grid-template-columns: 1fr; } }
+.cta-copy, .form-card { min-width: 0; }
 
 .cta-copy h2 { font-size: clamp(36px, 5vw, 60px); }
 .cta-meta { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 48px; }
@@ -630,10 +631,10 @@ h1, h2, h3, h4 {
 .form-card h3 { font-size: 22px; margin-bottom: 6px; color: var(--white); }
 .form-card .form-sub { font-size: 13.5px; color: var(--gray-on-black-soft); margin-bottom: 28px; }
 
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; min-width: 0; }
 @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
 
-.field { margin-bottom: 18px; }
+.field { margin-bottom: 18px; min-width: 0; }
 .field label {
   display: block;
   font-size: 11px;
@@ -668,7 +669,7 @@ h1, h2, h3, h4 {
 }
 .field-check input { width: 15px; height: 15px; margin-top: 2px; accent-color: var(--gold); }
 
-.form-submit { width: 100%; }
+.form-submit { width: 100%; white-space: normal; text-align: center; line-height: 1.4; }
 .form-note { margin-top: 16px; font-size: 11.5px; color: #78756e; text-align: center; }
 
 .form-status {
