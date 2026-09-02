@@ -279,7 +279,31 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 
-.hero-inner { max-width: 900px; position: relative; z-index: 2; }
+.hero-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(30px, 6vw, 80px);
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+.hero-inner { max-width: 680px; }
+
+.hero-logo-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-logo {
+  width: clamp(160px, 17vw, 300px);
+  height: auto;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.55));
+}
+@media (max-width: 980px) {
+  .hero-logo-wrap { display: none; }
+}
 
 .hero h1 {
   font-size: clamp(40px, 7vw, 92px);
