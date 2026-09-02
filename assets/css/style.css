@@ -735,6 +735,8 @@ h1, h2, h3, h4 {
   .nav-links { display: none; }
   .nav-right .nav-phone { display: none; }
   .nav-toggle { display: flex; }
+  .nav-logo img { height: 56px; }
+  .nav.scrolled .nav-logo img { height: 46px; }
 }
 
 /* Section padding tighten on mobile */
