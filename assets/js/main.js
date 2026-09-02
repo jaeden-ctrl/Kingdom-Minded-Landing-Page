@@ -28,17 +28,26 @@ mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () =>
   document.body.style.overflow = '';
 }));
 
-/* ---------- Scroll reveal ---------- */
+/* ---------- Scroll reveal ----------
+   Progressive enhancement: content is visible by default in CSS (so it
+   never depends on JS or an observer firing). Only here, once we know
+   JS is running and the visitor hasn't asked for reduced motion, do we
+   arm the hide-then-reveal animation. */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      io.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-revealEls.forEach(el => io.observe(el));
+
+if (!prefersReducedMotion && revealEls.length) {
+  document.documentElement.classList.add('js-reveal-armed');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+}
 
 /* ---------- Stagger children delay index for grids ---------- */
 document.querySelectorAll('.reveal-stagger').forEach(group => {
@@ -107,10 +116,10 @@ form.addEventListener('submit', async (e) => {
     } else {
       const data = await res.json().catch(() => null);
       const msg = data && data.errors ? data.errors.map(e => e.message).join(', ') : 'Something went wrong sending your request.';
-      showStatus(msg + ' Please call us directly at 714-257-5284.', true);
+      showStatus(msg + ' Please call us directly at (714) 442-3911.', true);
     }
   } catch (err) {
-    showStatus('Something went wrong sending your request. Please call us directly at 714-257-5284.', true);
+    showStatus('Something went wrong sending your request. Please call us directly at (714) 442-3911.', true);
   } finally {
     submitBtn.textContent = originalLabel;
     submitBtn.disabled = false;
