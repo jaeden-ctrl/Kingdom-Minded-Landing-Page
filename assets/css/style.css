@@ -187,8 +187,8 @@ h1, h2, h3, h4 {
 }
 
 .nav-logo { display: flex; align-items: center; gap: 10px; }
-.nav-logo img { height: 76px; width: auto; transition: height 0.4s var(--ease); }
-.nav.scrolled .nav-logo img { height: 58px; }
+.nav-logo img { height: 114px; width: auto; transition: height 0.4s var(--ease); }
+.nav.scrolled .nav-logo img { height: 87px; }
 
 .nav-links {
   display: flex;
