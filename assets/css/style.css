@@ -416,6 +416,8 @@ h1, h2, h3, h4 {
   grid-template-columns: repeat(4, 1fr);
   gap: 46px;
   margin-top: 64px;
+  padding-top: 44px;
+  border-top: 1px solid var(--line-on-black);
 }
 @media (max-width: 900px) {
   .pillars-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
@@ -440,7 +442,7 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 
-.core-pillars { margin-top: 64px; padding-top: 44px; border-top: 1px solid var(--line-on-black); }
+.core-pillars { margin-top: 64px; }
 .core-pillars-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 26px; }
 .core-pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
 @media (max-width: 900px) { .core-pillars-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
