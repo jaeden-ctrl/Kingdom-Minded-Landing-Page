@@ -442,7 +442,13 @@ h1, h2, h3, h4 {
 }
 
 .core-pillars { margin-top: 64px; }
-.core-pillars-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 26px; }
+.pillars-lead {
+  font-family: var(--font-head);
+  font-size: clamp(20px, 2.3vw, 26px);
+  font-weight: 500;
+  color: var(--gold);
+  margin-bottom: 26px;
+}
 .core-pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
 @media (max-width: 900px) { .core-pillars-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
 @media (max-width: 540px) { .core-pillars-grid { grid-template-columns: 1fr; } }
