@@ -411,13 +411,12 @@ h1, h2, h3, h4 {
 .image-feature h2 { font-size: clamp(34px, 5.4vw, 64px); }
 
 /* Pillars grid (4 cols) */
+.pillars-secondary { margin-top: 64px; padding-top: 44px; border-top: 1px solid var(--line-on-black); }
 .pillars-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 46px;
-  margin-top: 64px;
-  padding-top: 44px;
-  border-top: 1px solid var(--line-on-black);
+  margin-top: 32px;
 }
 @media (max-width: 900px) {
   .pillars-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
