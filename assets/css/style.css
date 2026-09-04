@@ -533,8 +533,6 @@ h1, h2, h3, h4 {
 .wontdo-list { border-top: 1px solid var(--line-on-black); margin-top: 8px; }
 .wontdo-row { border-bottom: 1px solid var(--line-on-black); padding: 30px 0; display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
 @media (max-width: 700px) { .wontdo-row { grid-template-columns: 1fr; gap: 12px; } }
-.wontdo-label { display: flex; align-items: center; gap: 14px; }
-.wontdo-icon { width: 24px; height: 24px; stroke: var(--gold); flex-shrink: 0; }
 .wontdo-row h4 { color: var(--gold); font-size: 18px; font-weight: 500; }
 .wontdo-row p { color: var(--gray-on-black); font-size: 16.5px; max-width: 52ch; }
 
