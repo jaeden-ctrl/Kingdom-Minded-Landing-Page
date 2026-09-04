@@ -83,6 +83,7 @@ section { position: relative; }
   background: var(--gold-dim);
 }
 .eyebrow.on-white { color: #a2854e; }
+.eyebrow-lg { font-size: 15px; letter-spacing: 0.3em; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
 
 .section-num {
   position: absolute;
@@ -104,7 +105,7 @@ h1, h2, h3, h4 {
 .accent { color: var(--gold); font-weight: 500; }
 
 .section-title {
-  font-size: clamp(32px, 4.4vw, 56px);
+  font-size: clamp(36px, 4.9vw, 62px);
   max-width: 16ch;
   margin-bottom: 22px;
 }
@@ -279,10 +280,11 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 
-.hero-inner { max-width: 900px; position: relative; z-index: 2; }
+.hero-inner { max-width: 860px; position: relative; z-index: 2; }
 
 .hero h1 {
-  font-size: clamp(40px, 7vw, 92px);
+  font-size: clamp(32px, 4.8vw, 58px);
+  line-height: 1.22;
   color: var(--white);
 }
 .hero h1 .gold { color: var(--gold); }
@@ -291,13 +293,29 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 30px 0 34px;
+  margin: 30px 0 26px;
   color: var(--gray-on-black);
   font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 .hero-sub::before { content:''; width: 40px; height: 1px; background: var(--gold-dim); }
+
+.hero-subtitle {
+  font-family: var(--font-head);
+  font-size: clamp(19px, 2.2vw, 26px);
+  font-weight: 500;
+  color: var(--gold);
+  margin: 22px 0 20px;
+}
+
+.hero-hook {
+  font-size: clamp(16px, 1.6vw, 18px);
+  color: var(--gray-on-black);
+  max-width: 560px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
 
 .hero-verse {
   font-family: var(--font-quote);
@@ -422,6 +440,14 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 
+.core-pillars { margin-top: 64px; padding-top: 44px; border-top: 1px solid var(--line-on-black); }
+.core-pillars-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 26px; }
+.core-pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
+@media (max-width: 900px) { .core-pillars-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
+@media (max-width: 540px) { .core-pillars-grid { grid-template-columns: 1fr; } }
+.core-pillar h5 { font-family: var(--font-head); font-size: 17px; font-weight: 500; color: var(--gold); margin-bottom: 8px; }
+.core-pillar p { font-size: 14.5px; color: var(--gray-on-black-soft); max-width: 30ch; }
+
 /* Leadership */
 .leaders-grid {
   display: grid;
@@ -475,7 +501,7 @@ h1, h2, h3, h4 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.compare-head span:first-child { color: #9a968b; }
+.compare-head span:first-child { color: #6f6b60; }
 .compare-head span:last-child { color: #a2854e; font-weight: 600; padding-left: clamp(20px, 4vw, 48px); }
 .compare-row {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -488,24 +514,27 @@ h1, h2, h3, h4 {
   width: 1px; background: rgba(162,133,78,0.4);
 }
 .compare-row div { padding: 26px 0; font-size: clamp(15.5px, 1.7vw, 17.5px); }
-.compare-row .no { color: #8f8b81; padding-right: clamp(20px, 4vw, 48px); }
+.compare-row .no { color: #66625a; padding-right: clamp(20px, 4vw, 48px); }
 .compare-row .yes { color: var(--ink); font-weight: 400; padding-left: clamp(20px, 4vw, 48px); }
 
 /* Covenant */
 .covenant-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 44px 60px; }
 @media (max-width: 640px) { .covenant-grid { grid-template-columns: 1fr; } }
-.covenant-item h4 { color: var(--gold); font-size: 20px; font-weight: 500; margin-bottom: 12px; }
+.covenant-item h4 { color: var(--white); font-size: 20px; font-weight: 500; margin-bottom: 12px; }
 .covenant-item p { color: var(--gray-on-black); font-size: 16.5px; max-width: 34ch; }
 .not-for-everyone {
-  margin-top: 50px;
+  margin-top: 64px;
   color: var(--gray-on-black-soft);
   font-size: 16px;
+  text-align: center;
 }
 
 /* What we won't do */
 .wontdo-list { border-top: 1px solid var(--line-on-black); margin-top: 8px; }
 .wontdo-row { border-bottom: 1px solid var(--line-on-black); padding: 30px 0; display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
-@media (max-width: 700px) { .wontdo-row { grid-template-columns: 1fr; gap: 8px; } }
+@media (max-width: 700px) { .wontdo-row { grid-template-columns: 1fr; gap: 12px; } }
+.wontdo-label { display: flex; align-items: center; gap: 14px; }
+.wontdo-icon { width: 24px; height: 24px; stroke: var(--gold); flex-shrink: 0; }
 .wontdo-row h4 { color: var(--gold); font-size: 18px; font-weight: 500; }
 .wontdo-row p { color: var(--gray-on-black); font-size: 16.5px; max-width: 52ch; }
 
@@ -530,13 +559,17 @@ h1, h2, h3, h4 {
 .nationwide-box p { color: var(--gray-on-white); font-size: 16.5px; }
 .nmls-note { margin-top: 30px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #9a968b; }
 
-/* Timeline (30 days) */
-.timeline-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px; margin-top: 60px; max-width: 900px; }
-@media (max-width: 640px) { .timeline-grid { grid-template-columns: 1fr; } }
-.tl-week { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-.tl-rule { width: 26px; height: 1px; background: var(--gold-dim); margin-bottom: 18px; }
-.timeline-grid h4 { font-size: 19px; color: var(--white); font-weight: 500; margin-bottom: 12px; }
-.timeline-grid p { font-size: 15.5px; color: var(--gray-on-black-soft); }
+/* What We're Looking For */
+.looking-for-list { border-top: 1px solid var(--line-on-black); margin-top: 44px; max-width: 840px; }
+.looking-for-item {
+  display: flex; align-items: flex-start; gap: 18px;
+  padding: 22px 0; border-bottom: 1px solid var(--line-on-black);
+}
+.looking-for-item svg { width: 20px; height: 20px; stroke: var(--gold); flex-shrink: 0; margin-top: 3px; }
+.looking-for-item p { font-size: 16.5px; color: var(--gray-on-black); }
+
+/* Where we lend: more states note */
+.more-states-note { margin-top: 14px; font-size: 14px; font-style: italic; color: var(--gray-on-white); }
 
 /* ============================================================
    CTA STRIP — repeated inline banner linking to the inquiry form
