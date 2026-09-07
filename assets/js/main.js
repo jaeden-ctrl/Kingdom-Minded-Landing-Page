@@ -57,26 +57,33 @@ document.querySelectorAll('.reveal-stagger').forEach(group => {
 });
 
 /* ============================================================
-   INQUIRY FORM — sends an email (and, once configured, a text)
-   notification the moment someone requests an alignment call.
+   INQUIRY FORM — posts straight into GoHighLevel so inquiries land
+   in the recruiting pipeline with automation, instead of an inbox.
 
-   This uses Formspree (https://formspree.io) — a free service
-   that emails form submissions with zero backend code required.
+   This uses a GHL "Inbound Webhook" workflow trigger — no API key
+   needed, and no backend code required.
 
-   SETUP (do this once):
-   1. Go to https://formspree.io and create a free account.
-   2. Create a new form and set the notification email to
-      wherever you want inquiries delivered.
-   3. Copy the Form ID Formspree gives you (looks like "mzzenwfg")
-      and paste it below in place of "YOUR_FORM_ID".
-   4. For TEXT message notifications, either:
-        a) Turn on email forwarding to your phone's SMS gateway, or
-        b) Connect Formspree -> Zapier -> Twilio (a "New Submission"
-           trigger that sends an SMS) — no code needed, just clicks.
-      See README.md for the full walkthrough.
+   SETUP (do this once, in GoHighLevel):
+   1. Go to Automation -> Workflows -> Create Workflow (blank).
+   2. Add Trigger -> "Inbound Webhook". GHL gives you a unique URL
+      like https://services.leadconnectorhq.com/hooks/xxxx/webhook-trigger/xxxx
+   3. Submit one test inquiry on the live site first (with this file
+      still pointing at the placeholder below is fine for the shape —
+      or use GHL's "Copy Sample" / send a manual test POST) so GHL
+      can read the field names and let you map them in later steps.
+   4. Add a "Create/Update Contact" action, mapping:
+        firstName, lastName, email, phone, city, licenseStatus,
+        howHeard, message
+      to the matching Contact fields (create custom fields for
+      licenseStatus/howHeard if you want them saved).
+   5. Add whatever automation you want after that — assign to a
+      pipeline stage, notify your team by SMS/email, etc. This is
+      the point where GHL replaces the old "just an inbox" version.
+   6. Copy the webhook URL from step 2 and paste it below in place
+      of "YOUR_GHL_WEBHOOK_URL".
    ============================================================ */
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+const GHL_WEBHOOK_URL = 'YOUR_GHL_WEBHOOK_URL';
 
 const form = document.getElementById('inquiryForm');
 const statusBox = document.getElementById('formStatus');
@@ -89,10 +96,10 @@ form.addEventListener('submit', async (e) => {
   const honeypot = form.querySelector('input[name="_gotcha"]');
   if (honeypot && honeypot.value) return;
 
-  const notConfigured = FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID');
+  const notConfigured = GHL_WEBHOOK_URL.includes('YOUR_GHL_WEBHOOK_URL');
   if (notConfigured) {
     showStatus(
-      'This form isn’t connected to an inbox yet. Add your Formspree form ID in assets/js/main.js (see README.md) to start receiving inquiries by email/text.',
+      'This form isn’t connected to GoHighLevel yet. Add your Inbound Webhook URL in assets/js/main.js (see README.md) to start receiving inquiries there.',
       true
     );
     return;
@@ -103,20 +110,31 @@ form.addEventListener('submit', async (e) => {
   submitBtn.disabled = true;
 
   try {
-    const formData = new FormData(form);
-    const res = await fetch(FORMSPREE_ENDPOINT, {
+    const fd = new FormData(form);
+    const payload = {
+      firstName: fd.get('First Name') || '',
+      lastName: fd.get('Last Name') || '',
+      email: fd.get('Email') || '',
+      phone: fd.get('Phone') || '',
+      city: fd.get('Location') || '',
+      licenseStatus: fd.get('License Status') || '',
+      howHeard: fd.get('How They Heard About Us') || '',
+      message: fd.get('Message') || '',
+      tcpaConsent: fd.get('TCPA Consent') ? true : false,
+      source: 'revivallending.com Kingdom Minded landing page'
+    };
+
+    const res = await fetch(GHL_WEBHOOK_URL, {
       method: 'POST',
-      body: formData,
-      headers: { Accept: 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
 
     if (res.ok) {
       form.reset();
       showStatus('Thank you — your request is in. A member of our team will reach out shortly to schedule your alignment call.', false);
     } else {
-      const data = await res.json().catch(() => null);
-      const msg = data && data.errors ? data.errors.map(e => e.message).join(', ') : 'Something went wrong sending your request.';
-      showStatus(msg + ' Please call us directly at (714) 442-3911.', true);
+      showStatus('Something went wrong sending your request. Please call us directly at (714) 442-3911.', true);
     }
   } catch (err) {
     showStatus('Something went wrong sending your request. Please call us directly at (714) 442-3911.', true);

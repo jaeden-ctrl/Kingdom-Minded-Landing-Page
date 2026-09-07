@@ -24,54 +24,54 @@ python3 -m http.server 8000
 
 then visit `http://localhost:8000`.
 
-## ⚠️ Required setup: connect the inquiry form to email/text notifications
+## ⚠️ Required setup: connect the inquiry form to GoHighLevel
 
 The "Request an Alignment Call" form at the bottom of the page is **not yet wired to
-an inbox**. Right now, submitting it will show a message telling the visitor it isn't
-configured. Do this once, and every submission will land in your email (and optionally
-as a text) automatically:
+your GHL account**. Right now, submitting it will show a message telling the visitor
+it isn't configured. It posts straight into a GHL Workflow via an **Inbound Webhook**
+trigger — no API key, no backend code, and it lands directly in your recruiting
+pipeline with automation instead of sitting in an inbox.
 
-### 1. Email notifications (5 minutes, free)
+### Set it up in GoHighLevel (~10 minutes)
 
-1. Go to **https://formspree.io** and create a free account.
-2. Create a new form. Set the notification email to whichever inbox should receive
-   inquiries (e.g. motivate4ward@yahoo.com, or a shared team inbox).
-3. Formspree gives you a **Form ID** (e.g. `mzzenwfg`).
-4. Open `assets/js/main.js`, find this line near the top of the form logic:
+1. In GHL, go to **Automation → Workflows → Create Workflow** (start from blank).
+2. Add a trigger: **Inbound Webhook**. GHL generates a unique URL that looks like
+   `https://services.leadconnectorhq.com/hooks/xxxxxxxx/webhook-trigger/xxxxxxxx`.
+3. Copy that URL, open `assets/js/main.js`, find this line near the top of the form logic:
 
    ```js
-   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+   const GHL_WEBHOOK_URL = 'YOUR_GHL_WEBHOOK_URL';
    ```
 
-   and replace `YOUR_FORM_ID` with your real ID.
-5. Deploy (see below). Submit a test inquiry on the live page — you should get an
-   email within seconds.
+   and replace `YOUR_GHL_WEBHOOK_URL` with the URL from step 2.
+4. Deploy (see below), then submit one test inquiry on the live page. GHL's webhook
+   trigger will capture that submission as a sample payload, which lets you map fields
+   in the next step (GHL shows a "Copy Sample" / detected-fields option once it has
+   received at least one real request).
+5. Back in the workflow, add a **Create/Update Contact** action and map these fields
+   from the webhook payload onto Contact fields:
 
-Formspree's free tier includes 50 submissions/month, spam filtering, and email
-notifications out of the box — plenty to start.
+   | Webhook field    | Maps to                          |
+   |-------------------|-----------------------------------|
+   | `firstName`       | First Name                        |
+   | `lastName`        | Last Name                         |
+   | `email`           | Email                              |
+   | `phone`           | Phone                              |
+   | `city`            | City (or a custom field)          |
+   | `licenseStatus`   | Custom field (create one)         |
+   | `howHeard`        | Custom field or Lead Source        |
+   | `message`         | Custom field / Notes               |
 
-### 2. Text (SMS) notifications (optional, ~10 minutes)
+6. Add whatever happens next — assign to a pipeline stage, notify your team by SMS or
+   email, trigger a follow-up sequence. This is the actual payoff of using GHL over a
+   plain inbox: the lead is instantly working inside your existing recruiting pipeline.
 
-Formspree doesn't send texts natively, so bridge it with **Zapier** (free tier works):
+### Alternative to GHL
 
-1. In Zapier, create a new Zap.
-2. **Trigger:** Formspree → "New Submission" (connect your Formspree account, pick your form).
-3. **Action:** Twilio → "Send SMS" (you'll need a free Twilio trial account + phone number),
-   or use Zapier's built-in SMS-by-Zapier action to text your own phone directly —
-   no Twilio account needed for that option.
-4. Map the form fields (Name, Phone, How They Heard About Us, Message) into your text template, e.g.:
-   > New LO inquiry: {{First Name}} {{Last Name}}, {{Phone}}, heard about us via {{How They Heard About Us}}.
-5. Turn the Zap on.
-
-Once both are set up, every submission on the site sends **both** an email and a text
-the moment someone fills out the form.
-
-### Alternative to Formspree
-
-If you'd rather use a different provider (Web3Forms, Basin, your own backend, etc.),
-just swap the `fetch()` call in `assets/js/main.js` — the form already POSTs standard
-field names (`First Name`, `Last Name`, `Email`, `Phone`, `Location`, `License Status`,
-`How They Heard About Us`, `Message`).
+If you'd rather use a different provider (Formspree, Web3Forms, your own backend, etc.),
+swap the `fetch()` call in `assets/js/main.js` — the code that builds the `payload`
+object right above it already has every field named clearly, so redirecting it
+elsewhere is a small edit.
 
 ## Deployment
 
@@ -81,7 +81,7 @@ This is a static site — deploy it anywhere that serves static files:
 - **GitHub Pages**: enable Pages on this repo, serve from the root of the main branch.
 - Any traditional web host: upload the files via FTP/SFTP.
 
-No environment variables or server-side code are required — the Formspree ID is the
+No environment variables or server-side code are required — the GHL webhook URL is the
 only thing you configure.
 
 ## Content source
@@ -92,10 +92,10 @@ All copy, the logo, owner photography (Tyson Hilton, Jaeden Kolb), and brand col
 
 ## Editing content later
 
-- **Copy/sections**: edit directly in `index.html` — it's organized top-to-bottom in the
-  same order as the pitch deck (Hero → Honest Question → Why Revival → Who We Are →
-  Leadership → Platform → Covenant → Comparison → What We Won't Do → Where We Lend →
-  First 30 Days → Apply/CTA → Footer).
+- **Copy/sections**: edit directly in `index.html` — it's organized top-to-bottom
+  (Hero → Honest Question → Why Revival → Who We Are → Leadership → Platform →
+  Covenant → Comparison → What We Won't Do → What We're Looking For → Where We Lend →
+  Apply/CTA → Footer).
 - **Colors/fonts**: all defined as CSS variables at the top of `assets/css/style.css`.
 - **Photos/logo**: replace files in `assets/img/` (keep the same filenames, or update
   the `src` attributes in `index.html`).
