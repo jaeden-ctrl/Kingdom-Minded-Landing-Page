@@ -148,5 +148,6 @@ function showStatus(message, isError) {
   statusBox.textContent = message;
   statusBox.classList.add('show');
   statusBox.classList.toggle('error', !!isError);
+  statusBox.classList.toggle('success', !isError);
   statusBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
