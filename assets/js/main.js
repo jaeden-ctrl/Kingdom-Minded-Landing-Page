@@ -83,7 +83,7 @@ document.querySelectorAll('.reveal-stagger').forEach(group => {
       of "YOUR_GHL_WEBHOOK_URL".
    ============================================================ */
 
-const GHL_WEBHOOK_URL = 'YOUR_GHL_WEBHOOK_URL';
+const GHL_WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/rC76iRdLNiuOSwOFbBhG/webhook-trigger/f23a88d9-9ad6-4d73-b87c-9f16f1fca6d2';
 
 const form = document.getElementById('inquiryForm');
 const statusBox = document.getElementById('formStatus');
