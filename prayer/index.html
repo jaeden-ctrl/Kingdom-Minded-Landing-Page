@@ -22,6 +22,14 @@
 })();
 </script>
 <link rel="canonical" href="https://kingdommindedrl.netlify.app/prayer/">
+<!-- Always open at the top: drop any #section left in a shared or refreshed link,
+     and don't let the browser restore an old scroll position. -->
+<script>
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+})();
+</script>
 
 <meta property="og:title" content="Kingdom Minded Prayer Call">
 <meta property="og:description" content="30 minutes of prayer and Scripture for people in real estate and mortgage. Mondays, 9:30 AM Pacific, on Zoom. Come as you are.">
