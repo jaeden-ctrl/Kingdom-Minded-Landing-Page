@@ -103,7 +103,7 @@ Open `assets/js/prayer.js` and edit the `PRAYER_CONFIG` block at the top:
 
 ```js
 const PRAYER_CONFIG = {
-  zoomUrl: 'https://zoom.us/j/...',   // your recurring meeting's Join link
+  zoomUrl: 'https://us02web.zoom.us/j/...',  // your recurring meeting's Join link
   meetingId: '123 4567 8901',
   passcode: '',                       // '' if there isn't one
   videoUrl: ''                        // YouTube, Vimeo, Loom, or .mp4 link

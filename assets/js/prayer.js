@@ -21,9 +21,12 @@
    time converted to their own.
    ============================================================ */
 const PRAYER_CONFIG = {
-  zoomUrl: 'https://zoom.us/j/00000000000?pwd=REPLACE_WITH_YOUR_ZOOM_LINK',
-  meetingId: '000 0000 0000',
-  passcode: '',
+  zoomUrl: 'https://us02web.zoom.us/j/85109728119?pwd=tylfVJQszbCKIA0H7IIbz378LQSD8e.1',
+  meetingId: '851 0972 8119',
+  passcode: '177576',
+  // Dial-in by phone (one tap joins the meeting with ID + passcode)
+  dialIn: '+1 669 900 9128',
+  dialInTap: 'tel:+16699009128,,85109728119#,,,,*177576#',
   videoUrl: ''
 };
 
@@ -33,6 +36,7 @@ const SCHEDULE = {
   hour: 9,
   minute: 30,
   durationMin: 30,
+  firstCall: { y: 2026, m: 12, d: 7 },   // first meeting in the Zoom series (Dec 7, 2026)
   title: 'Monday Prayer Call · Revival Lending'
 };
 
@@ -79,6 +83,11 @@ document.querySelectorAll('.reveal-stagger').forEach(group => {
 document.querySelectorAll('[data-zoom-link]').forEach(a => { a.href = PRAYER_CONFIG.zoomUrl; });
 document.querySelectorAll('[data-zoom-id]').forEach(el => { el.textContent = PRAYER_CONFIG.meetingId || 'In the link'; });
 document.querySelectorAll('[data-zoom-pass]').forEach(el => { el.textContent = PRAYER_CONFIG.passcode || 'None needed'; });
+document.querySelectorAll('[data-dial-in]').forEach(a => {
+  if (!PRAYER_CONFIG.dialIn) { a.closest('.dial-in').remove(); return; }
+  a.textContent = PRAYER_CONFIG.dialIn;
+  a.href = PRAYER_CONFIG.dialInTap || 'tel:' + PRAYER_CONFIG.dialIn.replace(/[^\d+]/g, '');
+});
 
 /* ---------- Invitation video ---------- */
 function toEmbed(url) {
@@ -129,13 +138,16 @@ function datePartsIn(ts, timeZone) {
 }
 
 function nextCall(now = Date.now()) {
-  const { y, m, d } = datePartsIn(now, SCHEDULE.timeZone);
+  let { y, m, d } = datePartsIn(now, SCHEDULE.timeZone);
+  const f = SCHEDULE.firstCall;
+  const isFirst = f && Date.UTC(y, m, d) <= Date.UTC(f.y, f.m - 1, f.d);
+  if (isFirst) { y = f.y; m = f.m - 1; d = f.d; }
   for (let i = 0; i <= 7; i++) {
     const day = new Date(Date.UTC(y, m, d + i));
     if (day.getUTCDay() !== SCHEDULE.weekday) continue;
     const start = zonedToUtc(day.getUTCFullYear(), day.getUTCMonth(), day.getUTCDate(), SCHEDULE.hour, SCHEDULE.minute, SCHEDULE.timeZone);
     const end = start + SCHEDULE.durationMin * 60000;
-    if (now < end) return { start, end, live: now >= start };
+    if (now < end) return { start, end, live: now >= start, first: isFirst && i === 0 };
   }
   return null;
 }
@@ -163,7 +175,7 @@ function renderNextCall() {
   const dateLabel = `${fmt(call.start, { weekday: 'long', month: 'short', day: 'numeric' }, tz)} · ${fmt(call.start, { hour: 'numeric', minute: '2-digit' }, tz)} PT`.replace(/[ \u202f](AM|PM) PT$/, '\u00a0$1\u00a0PT');
 
   document.querySelectorAll('[data-next-date]').forEach(el => { el.textContent = dateLabel; });
-  document.querySelectorAll('[data-next-status]').forEach(el => { el.textContent = call.live ? 'Live Now' : 'Next Call'; });
+  document.querySelectorAll('[data-next-status]').forEach(el => { el.textContent = call.live ? 'Live Now' : (call.first ? 'First Call' : 'Next Call'); });
   document.body.classList.toggle('is-live', call.live);
 
   const cd = document.querySelector('[data-next-countdown]');
@@ -197,6 +209,7 @@ const calDetails =
   `Join on Zoom: ${PRAYER_CONFIG.zoomUrl}\n` +
   (PRAYER_CONFIG.meetingId ? `Meeting ID: ${PRAYER_CONFIG.meetingId}\n` : '') +
   (PRAYER_CONFIG.passcode ? `Passcode: ${PRAYER_CONFIG.passcode}\n` : '') +
+  (PRAYER_CONFIG.dialIn ? `Dial in: ${PRAYER_CONFIG.dialIn}\n` : '') +
   `\n${pageUrl}`;
 
 if (firstCall) {

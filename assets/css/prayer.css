@@ -389,3 +389,7 @@
 }
 .join-section h2.invite-title { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.2; }
 .rhythm-time { font-size: 15px; letter-spacing: 0.1em; padding-top: 4px; }
+
+.dial-in { margin-top: 16px; text-align: center; font-size: 13.5px; color: var(--gray-on-black-soft); }
+.dial-in a { color: var(--white); white-space: nowrap; }
+.dial-in a:hover { color: var(--gold); }
