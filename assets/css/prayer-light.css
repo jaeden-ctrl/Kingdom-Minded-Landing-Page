@@ -1,0 +1,139 @@
+/* ============================================================
+   Kingdom Minded Prayer Call — LIGHT THEME (trial)
+   Turn on by adding this stylesheet after prayer.css and
+   class="prayer-page theme-light" on <body>. Remove both to go
+   back to the original black/gold look.
+
+   Approach: re-point the brand color tokens for the page body
+   (white backgrounds, ink text, deeper gold for legibility on
+   white), then reset them inside the footer so the footer stays
+   black and grounds the page like the Kingdom Minded site.
+   ============================================================ */
+
+.theme-light {
+  --black: #ffffff;            /* main section backgrounds   */
+  --near-black: #faf6ef;       /* soft cream panels          */
+  --panel: #f6f0e5;
+  --ivory: #faf6ef;
+  --white: #17140f;            /* primary text               */
+  --gold: #a2854e;             /* gold text/icons, legible on white */
+  --gold-bright: #8b6f3d;
+  --gold-dim: #a88b55;         /* hairlines and small labels */
+  --gray-on-black: #55524b;
+  --gray-on-black-soft: #6b675e;
+  --line-on-black: rgba(162, 133, 78, 0.22);
+  background: #ffffff;
+  color: #17140f;
+}
+
+/* Footer keeps the original dark palette */
+.theme-light .footer {
+  --black: #050505;
+  --near-black: #0b0b0b;
+  --white: #ffffff;
+  --gold: #c9ab7c;
+  --gold-bright: #d9c095;
+  --gold-dim: #a68f68;
+  --gray-on-black: #b9b6ae;
+  --gray-on-black-soft: #a8a49c;
+  --line-on-black: rgba(201, 171, 124, 0.18);
+  color: #ffffff;
+}
+
+/* ---------- Buttons: keep the bright champagne gold ---------- */
+.theme-light .btn-gold { background: #c9ab7c; color: #17140f; }
+.theme-light .btn-gold:hover { background: #d4b88a; box-shadow: 0 14px 30px -14px rgba(162,133,78,0.55); }
+.theme-light .btn-outline { color: #17140f; border-color: rgba(23,20,15,0.22); }
+.theme-light .btn-outline:hover { color: #a2854e; border-color: #a2854e; }
+
+/* ---------- Nav ---------- */
+.theme-light .nav.scrolled {
+  background: rgba(255,255,255,0.9);
+  border-bottom-color: rgba(23,20,15,0.08);
+  box-shadow: 0 10px 30px -24px rgba(23,20,15,0.35);
+}
+.theme-light .nav-links a { color: #4a463f; }
+.theme-light .nav-links a:hover,
+.theme-light .nav-links a.nav-platform { color: #a2854e; }
+.theme-light .mobile-panel { background: #ffffff; }
+
+/* ---------- Hero: warm morning light ---------- */
+.theme-light .hero {
+  background:
+    radial-gradient(ellipse 70% 60% at 78% 18%, rgba(214,183,128,0.22), transparent 62%),
+    radial-gradient(ellipse 60% 50% at 10% 100%, rgba(214,183,128,0.10), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #fbf7f0 100%);
+}
+.theme-light .hero::before {
+  background-image:
+    linear-gradient(rgba(162,133,78,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(162,133,78,0.07) 1px, transparent 1px);
+}
+.theme-light .next-call {
+  background: #ffffff;
+  border-color: rgba(162,133,78,0.28);
+  box-shadow: 0 30px 60px -36px rgba(120,95,50,0.35);
+}
+.theme-light .next-call-facts li { color: #2a2620; }
+.theme-light .live-dot { background: #c9ab7c; }
+
+/* ---------- Text colors that were hard-coded for dark ---------- */
+.theme-light .qa-item { color: #2a2620; }
+.theme-light .verse-feature-quote,
+.theme-light .declare-item p { color: #2a2620; }
+.theme-light .eyebrow-lg { text-shadow: none; }
+
+/* ---------- Section rhythm: white / cream alternation ---------- */
+.theme-light .section.bg-black + .section.bg-panel,
+.theme-light .host-section { border-top: 1px solid rgba(162,133,78,0.14); }
+.theme-light #who { background: #ffffff; }
+.theme-light #invitation { border-top: 1px solid rgba(162,133,78,0.14); }
+
+/* Video placeholder */
+.theme-light .video-frame {
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 45%, rgba(214,183,128,0.22), transparent 70%),
+    linear-gradient(180deg, #fbf8f2, #f3ece0);
+  border-color: rgba(162,133,78,0.25);
+}
+.theme-light .video-play { background: #ffffff; box-shadow: 0 18px 40px -18px rgba(120,95,50,0.45); }
+
+/* Isaiah 43:19 feature: soft sunrise glow */
+.theme-light .verse-feature {
+  background:
+    radial-gradient(ellipse 55% 65% at 50% 50%, rgba(214,183,128,0.24), transparent 70%),
+    #faf6ef;
+}
+.theme-light .verse-feature::before {
+  background-image:
+    linear-gradient(rgba(162,133,78,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(162,133,78,0.06) 1px, transparent 1px);
+}
+
+/* What we pray for */
+.theme-light .pray-item { background: #ffffff; }
+.theme-light .pray-item:hover { background: #fbf7f0; }
+
+/* Stories */
+.theme-light .story-card {
+  background: #ffffff;
+  box-shadow: 0 24px 48px -36px rgba(120,95,50,0.4);
+}
+.theme-light .story-card:hover { border-color: rgba(162,133,78,0.55); }
+
+/* ---------- Join: light wash over the office photo ---------- */
+.theme-light .cta-section::before {
+  background: linear-gradient(100deg, rgba(255,255,255,0.97) 25%, rgba(250,246,239,0.92) 60%, rgba(250,246,239,0.85) 100%);
+}
+.theme-light .form-card {
+  background: #ffffff;
+  border: 1.5px solid #c9ab7c;
+  box-shadow: 0 0 0 6px rgba(201,171,124,0.10), 0 40px 80px -40px rgba(120,95,50,0.45);
+  backdrop-filter: none;
+}
+.theme-light .share-btn { border-color: rgba(23,20,15,0.14); color: #4a463f; }
+.theme-light .share-btn:hover { border-color: #a2854e; color: #a2854e; }
+.theme-light .dial-in a { color: #17140f; }
+
+/* Hosted by */
+.theme-light .leader-photo { border-color: rgba(162,133,78,0.25); }
