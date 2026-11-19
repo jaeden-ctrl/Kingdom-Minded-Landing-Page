@@ -447,10 +447,10 @@
 }
 @media (max-width: 480px) { .prayer-page .nav-right { display: none; } }
 
-/* KM monogram (concept A1), sized to the full height of the two-line wordmark */
-.km-icon { width: 44px; height: 35px; stroke: var(--gold); flex-shrink: 0; }
-.km-mark-lg .km-icon { width: 54px; height: 43px; }
-@media (max-width: 880px) { .km-icon { width: 36px; height: 29px; } }
+/* Open Door symbol, sized to the full height of the two-line wordmark */
+.km-icon { width: 38px; height: 38px; color: var(--gold); flex-shrink: 0; }
+.km-mark-lg .km-icon { width: 48px; height: 48px; }
+@media (max-width: 880px) { .km-icon { width: 32px; height: 32px; } }
 
 /* ---------- Add-to-calendar menu ---------- */
 .cal-pop { position: relative; margin-top: 14px; }
