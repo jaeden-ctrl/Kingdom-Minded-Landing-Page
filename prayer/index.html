@@ -10,6 +10,18 @@
 <link rel="apple-touch-icon" href="../assets/img/km-apple-touch-icon.png">
 <link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="../assets/css/prayer.css">
+<!-- Design previews: add ?theme=mixed or ?theme=light to the URL to try the alternate looks.
+     Normal visitors (no ?theme) always get the standard design. -->
+<script>
+(function () {
+  var t = new URLSearchParams(location.search).get('theme');
+  if (t === 'mixed' || t === 'light') {
+    document.documentElement.classList.add('theme-' + t);
+    document.write('<link rel="stylesheet" href="../assets/css/prayer-' + t + '.css">');
+  }
+})();
+</script>
+<link rel="canonical" href="https://kingdommindedrl.netlify.app/prayer/">
 
 <meta property="og:title" content="Kingdom Minded Prayer Call">
 <meta property="og:description" content="30 minutes of prayer and Scripture for people in real estate and mortgage. Mondays, 9:30 AM Pacific, on Zoom. Come as you are.">
@@ -117,7 +129,7 @@
 </section>
 
 <!-- ============================ IF THIS IS YOU ============================ -->
-<section class="section bg-panel">
+<section class="section bg-panel" id="if-this-is-you">
   <div class="section-num">02</div>
   <div class="container split">
     <div class="reveal">
@@ -252,7 +264,7 @@
 </section>
 
 <!-- ============================ STORIES ============================ -->
-<section class="section bg-black">
+<section class="section bg-black" id="stories">
   <div class="section-num">05</div>
   <div class="container">
     <div class="reveal stories-head">
