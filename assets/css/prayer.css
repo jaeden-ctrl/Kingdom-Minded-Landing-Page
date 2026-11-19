@@ -371,12 +371,8 @@
 /* ---------- Scripture headline + ESV small caps ---------- */
 .sc { font-variant: small-caps; }
 .prayer-hero h1.verse-title {
-  font-family: var(--font-quote);
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(34px, 4.6vw, 58px);
-  line-height: 1.18;
-  letter-spacing: 0;
+  font-size: clamp(30px, 4.2vw, 52px);
+  line-height: 1.2;
 }
 .verse-title-cite {
   display: block;
