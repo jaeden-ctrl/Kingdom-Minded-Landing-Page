@@ -79,6 +79,23 @@ document.querySelectorAll('.reveal-stagger').forEach(group => {
   Array.from(group.children).forEach((child, i) => child.style.setProperty('--i', i));
 });
 
+/* ---------- In-page links: scroll without adding #section to the address ----------
+   Keeps the shareable address clean, so a copied or refreshed link opens at the top. */
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
+  const id = a.getAttribute('href').slice(1);
+  const target = id ? document.getElementById(id) : null;
+  if (!id || id === 'top') {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    return;
+  }
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: id === 'calendar' ? 'center' : 'start' });
+});
+
 /* ---------- Zoom details ---------- */
 document.querySelectorAll('[data-zoom-link]').forEach(a => { a.href = PRAYER_CONFIG.zoomUrl; });
 document.querySelectorAll('[data-zoom-id]').forEach(el => { el.textContent = PRAYER_CONFIG.meetingId || 'In the link'; });
