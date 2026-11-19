@@ -196,7 +196,7 @@ function renderNextCall() {
 const firstCall = renderNextCall();
 setInterval(renderNextCall, 30000);
 
-/* ---------- Calendar: Google link + .ics download (weekly) ---------- */
+/* ---------- Calendar: Google link (Apple/Outlook use the hosted .ics file) ---------- */
 function stamp(ts, timeZone) {
   const p = new Intl.DateTimeFormat('en-US', {
     timeZone, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
@@ -226,38 +226,32 @@ if (firstCall) {
   g.searchParams.set('location', PRAYER_CONFIG.zoomUrl);
   document.querySelectorAll('[data-cal-google]').forEach(a => { a.href = g.toString(); });
 
-  const esc = s => s.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
-  const ics = [
-    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Revival Lending//Kingdom Minded Prayer Call//EN', 'CALSCALE:GREGORIAN',
-    'BEGIN:VTIMEZONE', 'TZID:America/Los_Angeles',
-    'BEGIN:DAYLIGHT', 'TZOFFSETFROM:-0800', 'TZOFFSETTO:-0700', 'TZNAME:PDT', 'DTSTART:19700308T020000', 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU', 'END:DAYLIGHT',
-    'BEGIN:STANDARD', 'TZOFFSETFROM:-0700', 'TZOFFSETTO:-0800', 'TZNAME:PST', 'DTSTART:19701101T020000', 'RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU', 'END:STANDARD',
-    'END:VTIMEZONE',
-    'BEGIN:VEVENT',
-    `UID:monday-prayer-call@revivallending.com`,
-    `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '')}`,
-    `DTSTART;TZID=America/Los_Angeles:${start}`,
-    `DTEND;TZID=America/Los_Angeles:${end}`,
-    'RRULE:FREQ=WEEKLY;BYDAY=MO',
-    `SUMMARY:${esc(SCHEDULE.title)}`,
-    `DESCRIPTION:${esc(calDetails)}`,
-    `LOCATION:${esc(PRAYER_CONFIG.zoomUrl)}`,
-    `URL:${PRAYER_CONFIG.zoomUrl}`,
-    'BEGIN:VALARM', 'TRIGGER:-PT10M', 'ACTION:DISPLAY', 'DESCRIPTION:Kingdom Minded Prayer Call starts in 10 minutes', 'END:VALARM',
-    'END:VEVENT', 'END:VCALENDAR'
-  ].join('\r\n');
-
-  const icsHref = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
-  document.querySelectorAll('[data-cal-ics]').forEach(a => {
-    a.href = icsHref;
-    a.download = 'monday-prayer-call.ics';
-  });
 }
 
-// "Add it to my calendar" in the hero scrolls to the calendar options
-document.querySelectorAll('[data-cal-open]').forEach(btn => btn.addEventListener('click', () => {
-  document.getElementById('calendar').scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'center' });
-}));
+/* Apple / Outlook use the real calendar file on the site
+   (assets/kingdom-minded-prayer-call.ics, built by scripts/make-calendar-file.py).
+   A hosted file opens straight into Calendar on iPhone and Mac, where a
+   file generated in the browser often fails. */
+
+// Hero "Add it to my calendar" opens a small menu of calendar choices
+document.querySelectorAll('[data-cal-toggle]').forEach(btn => {
+  const menu = document.getElementById(btn.getAttribute('aria-controls'));
+  const close = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = menu.hidden;
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  menu.addEventListener('click', (e) => { if (e.target.closest('a')) setTimeout(close, 150); });
+  document.addEventListener('click', (e) => { if (!menu.hidden && !btn.parentElement.contains(e.target)) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+});
+
+// Instagram / Facebook / LinkedIn in-app browsers block calendar adds: show a tip
+if (/Instagram|FBAN|FBAV|FB_IAB|LinkedInApp|Line\//i.test(navigator.userAgent || '')) {
+  document.querySelectorAll('[data-inapp-tip]').forEach(el => { el.hidden = false; });
+}
 
 /* ---------- Share ---------- */
 document.querySelectorAll('[data-share]').forEach(btn => btn.addEventListener('click', async () => {

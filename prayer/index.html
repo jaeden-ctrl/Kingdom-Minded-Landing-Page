@@ -93,7 +93,15 @@
         <li><span>Cost</span>Free. Always.</li>
       </ul>
       <a href="#join" class="btn btn-gold next-call-btn" data-zoom-link target="_blank" rel="noopener">Join on Zoom</a>
-      <button type="button" class="next-call-cal" data-cal-open>Add it to my calendar</button>
+      <div class="cal-pop">
+        <button type="button" class="next-call-cal" data-cal-toggle aria-expanded="false" aria-controls="calMenu">Add it to my calendar</button>
+        <div class="cal-menu" id="calMenu" hidden>
+          <a href="#calendar" data-cal-google target="_blank" rel="noopener">Google Calendar</a>
+          <a href="../assets/kingdom-minded-prayer-call.ics" data-cal-ics>Apple Calendar <span>iPhone, iPad, Mac</span></a>
+          <a href="../assets/kingdom-minded-prayer-call.ics" data-cal-ics>Outlook <span>desktop app</span></a>
+        </div>
+      </div>
+      <p class="cal-tip" data-inapp-tip hidden>Viewing this inside Instagram or Facebook? Tap the &#8943; menu and choose <strong>Open in browser</strong> first. Those apps block adding to your calendar.</p>
     </aside>
   </div>
   <div class="hero-scroll"><span class="line"></span> Come As You Are</div>
@@ -405,9 +413,11 @@
 
       <div class="cal-row" id="calendar">
         <span class="cal-label">Add to calendar</span>
-        <a href="#" class="cal-link" data-cal-google target="_blank" rel="noopener">Google</a>
-        <a href="#" class="cal-link" data-cal-ics>Apple / Outlook</a>
+        <a href="#calendar" class="cal-link" data-cal-google target="_blank" rel="noopener">Google</a>
+        <a href="../assets/kingdom-minded-prayer-call.ics" class="cal-link" data-cal-ics>Apple</a>
+        <a href="../assets/kingdom-minded-prayer-call.ics" class="cal-link" data-cal-ics>Outlook</a>
       </div>
+      <p class="cal-tip" data-inapp-tip hidden>Viewing this inside Instagram or Facebook? Tap the &#8943; menu and choose <strong>Open in browser</strong> first. Those apps block adding to your calendar.</p>
 
       <button type="button" class="share-btn" data-share>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7"></path><path d="M16 6l-4-4-4 4"></path><path d="M12 2v13"></path></svg>
