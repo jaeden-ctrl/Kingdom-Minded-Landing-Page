@@ -84,6 +84,38 @@ This is a static site — deploy it anywhere that serves static files:
 No environment variables or server-side code are required — the GHL webhook URL is the
 only thing you configure.
 
+## Monday Prayer Call page (`/prayer/`)
+
+A separate invitation page for the weekly industry prayer call, built on the same
+stylesheet so it looks like part of the Kingdom Minded site. It links back to the
+main page only near the bottom ("Who's Hosting") and in the footer.
+
+```
+prayer/index.html        The prayer call page (live at /prayer/)
+assets/css/prayer.css    Styles that only the prayer page uses (it loads style.css first)
+assets/js/prayer.js      Zoom link, video embed, next-call countdown, calendar, share
+assets/img/og-prayer.jpg Social preview image for the prayer page link
+```
+
+### Add the Zoom link and the video
+
+Open `assets/js/prayer.js` and edit the `PRAYER_CONFIG` block at the top:
+
+```js
+const PRAYER_CONFIG = {
+  zoomUrl: 'https://us02web.zoom.us/j/...',  // your recurring meeting's Join link
+  meetingId: '123 4567 8901',
+  passcode: '',                       // '' if there isn't one
+  videoUrl: ''                        // YouTube, Vimeo, Loom, or .mp4 link
+};
+```
+
+Every Zoom button, both calendar options (Google, and the Apple/Outlook `.ics` file),
+and the video player update from those values. The call time is set in `SCHEDULE`
+just below it (Mondays 9:30 AM Pacific). Visitors in other time zones automatically
+see the time converted to their own, and the page shows "Live Now" while the call
+is running.
+
 ## Content source
 
 All copy, the logo, owner photography (Tyson Hilton, Jaeden Kolb), and brand colors
