@@ -367,3 +367,25 @@
   .text-link { display: inline; line-height: 2; }
   .next-call { padding: 28px 24px 24px; }
 }
+
+/* ---------- Scripture headline + ESV small caps ---------- */
+.sc { font-variant: small-caps; }
+.prayer-hero h1.verse-title {
+  font-family: var(--font-quote);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(34px, 4.6vw, 58px);
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+.verse-title-cite {
+  display: block;
+  margin-top: 22px;
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.join-section h2.invite-title { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.2; }
+.rhythm-time { font-size: 15px; letter-spacing: 0.1em; padding-top: 4px; }
