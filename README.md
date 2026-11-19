@@ -84,9 +84,10 @@ This is a static site — deploy it anywhere that serves static files:
 No environment variables or server-side code are required — the GHL webhook URL is the
 only thing you configure.
 
-## Monday Prayer Call page (`/prayer/`)
+## Kingdom Minded Prayer Call page (`/prayer/`)
 
-A separate invitation page for the weekly industry prayer call, built on the same
+A separate invitation page for the weekly industry prayer call, branded "Kingdom Minded Prayer Call"
+(Revival Lending appears only as the host, near the bottom). It is built on the same
 stylesheet so it looks like part of the Kingdom Minded site. It links back to the
 main page only near the bottom ("Who's Hosting") and in the footer.
 
