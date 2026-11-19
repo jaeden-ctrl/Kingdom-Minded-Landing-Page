@@ -1,5 +1,5 @@
 // ============================================================
-// Revival Lending — Monday Prayer Call (prayer/index.html)
+// Kingdom Minded Prayer Call (prayer/index.html), hosted by Revival Lending
 // ============================================================
 
 /* ============================================================
@@ -37,7 +37,7 @@ const SCHEDULE = {
   minute: 30,
   durationMin: 30,
   firstCall: { y: 2026, m: 12, d: 7 },   // first meeting in the Zoom series (Dec 7, 2026)
-  title: 'Monday Prayer Call · Revival Lending'
+  title: 'Kingdom Minded Prayer Call'
 };
 
 /* ---------- Shared page behavior (mirrors main.js) ---------- */
@@ -112,7 +112,7 @@ function toEmbed(url) {
   if (embed.type === 'video') {
     frame.innerHTML = `<video src="${embed.src}" controls playsinline preload="metadata"></video>`;
   } else {
-    frame.innerHTML = `<iframe src="${embed.src}" title="The Monday Prayer Call invitation" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen loading="lazy"></iframe>`;
+    frame.innerHTML = `<iframe src="${embed.src}" title="The Kingdom Minded Prayer Call invitation" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen loading="lazy"></iframe>`;
   }
 })();
 
@@ -228,7 +228,7 @@ if (firstCall) {
 
   const esc = s => s.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
   const ics = [
-    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Revival Lending//Monday Prayer Call//EN', 'CALSCALE:GREGORIAN',
+    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Revival Lending//Kingdom Minded Prayer Call//EN', 'CALSCALE:GREGORIAN',
     'BEGIN:VTIMEZONE', 'TZID:America/Los_Angeles',
     'BEGIN:DAYLIGHT', 'TZOFFSETFROM:-0800', 'TZOFFSETTO:-0700', 'TZNAME:PDT', 'DTSTART:19700308T020000', 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU', 'END:DAYLIGHT',
     'BEGIN:STANDARD', 'TZOFFSETFROM:-0700', 'TZOFFSETTO:-0800', 'TZNAME:PST', 'DTSTART:19701101T020000', 'RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU', 'END:STANDARD',
@@ -243,7 +243,7 @@ if (firstCall) {
     `DESCRIPTION:${esc(calDetails)}`,
     `LOCATION:${esc(PRAYER_CONFIG.zoomUrl)}`,
     `URL:${PRAYER_CONFIG.zoomUrl}`,
-    'BEGIN:VALARM', 'TRIGGER:-PT10M', 'ACTION:DISPLAY', 'DESCRIPTION:Monday Prayer Call starts in 10 minutes', 'END:VALARM',
+    'BEGIN:VALARM', 'TRIGGER:-PT10M', 'ACTION:DISPLAY', 'DESCRIPTION:Kingdom Minded Prayer Call starts in 10 minutes', 'END:VALARM',
     'END:VEVENT', 'END:VCALENDAR'
   ].join('\r\n');
 
@@ -264,7 +264,7 @@ document.querySelectorAll('[data-share]').forEach(btn => btn.addEventListener('c
   const label = btn.querySelector('[data-share-label]');
   const original = label.textContent;
   const shareData = {
-    title: 'Monday Prayer Call',
+    title: 'Kingdom Minded Prayer Call',
     text: 'Thirty minutes of prayer for people in real estate and mortgage. Mondays, 9:30 AM Pacific, on Zoom.',
     url: pageUrl
   };
