@@ -475,3 +475,10 @@
   border-left: 2px solid var(--gold); padding-left: 10px; text-align: left;
 }
 .cal-tip strong { color: var(--white); font-weight: 500; }
+
+/* Mobile hero: start the content right under the menu instead of
+   vertically centering it in a full-screen block */
+@media (max-width: 880px) {
+  .prayer-hero { min-height: 0; align-items: flex-start; padding-top: 104px; }
+  .prayer-hero .hero-sub { margin-top: 0; }
+}
