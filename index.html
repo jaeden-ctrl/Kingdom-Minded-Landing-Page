@@ -9,6 +9,14 @@
 <link rel="icon" type="image/png" href="assets/img/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="stylesheet" href="assets/css/style.css">
+<!-- Always open at the top: drop any #section left in a shared or refreshed link,
+     and don't let the browser restore an old scroll position. -->
+<script>
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+})();
+</script>
 
 <meta property="og:title" content="Revival Lending | The Kingdom Minded Platform">
 <meta property="og:description" content="For self-sourced originators. 50+ wholesale lenders, wholesale pricing, 1099 freedom — with owners in the trenches beside you.">
