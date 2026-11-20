@@ -49,6 +49,20 @@ if (!prefersReducedMotion && revealEls.length) {
   revealEls.forEach(el => io.observe(el));
 }
 
+/* ---------- In-page links: scroll without adding #section to the address ----------
+   Keeps the shareable address clean, so a copied or refreshed link opens at the top. */
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
+  const id = a.getAttribute('href').slice(1);
+  const behavior = prefersReducedMotion ? 'auto' : 'smooth';
+  if (!id || id === 'top') { e.preventDefault(); window.scrollTo({ top: 0, behavior }); return; }
+  const target = document.getElementById(id);
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior, block: 'start' });
+});
+
 /* ---------- Stagger children delay index for grids ---------- */
 document.querySelectorAll('.reveal-stagger').forEach(group => {
   Array.from(group.children).forEach((child, i) => {
