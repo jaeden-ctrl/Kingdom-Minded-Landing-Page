@@ -496,7 +496,7 @@
 @media (max-width: 980px) {
   .join-section { background-position: 60% top; background-size: auto 62%; background-repeat: no-repeat; }
   .join-section::before {
-    background: linear-gradient(180deg, #050505 0%, rgba(5,5,5,0.55) 14%, rgba(5,5,5,0.7) 40%, #050505 62%);
+    background: linear-gradient(180deg, #050505 0%, rgba(5,5,5,0.8) 14%, rgba(5,5,5,0.84) 40%, #050505 62%);
   }
 }
 
