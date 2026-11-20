@@ -594,3 +594,10 @@
   .prayer-hero .hero-hook { line-height: 1.75; margin-bottom: 44px; }
   .prayer-hero .hero-ctas { gap: 14px; }
 }
+
+/* Mobile: sections already have side padding, so drop the container's second
+   layer of padding. Keeps every section on the same 24px margins as the hero. */
+@media (max-width: 880px) {
+  .prayer-page .section > .container,
+  .prayer-page .cta-section > .container { padding-left: 0; padding-right: 0; }
+}
