@@ -545,3 +545,22 @@
       url('../img/wilderness-river.jpg') 58% 55% / cover no-repeat;
   }
 }
+
+/* ---------- "The stories we keep coming back to": open Scripture, dimmed and faded ---------- */
+#stories { overflow: hidden; isolation: isolate; }
+#stories::before {
+  content: '';
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, #050505 0%, rgba(5,5,5,0.64) 22%, rgba(5,5,5,0.62) 58%, rgba(5,5,5,0.9) 84%, #050505 100%),
+    linear-gradient(90deg, rgba(5,5,5,0.88) 0%, rgba(5,5,5,0.5) 55%, rgba(5,5,5,0.6) 100%),
+    url('../img/open-scripture.jpg') center 40% / cover no-repeat;
+}
+#stories .story-card { background: rgba(8,8,7,0.72); backdrop-filter: blur(3px); }
+@media (max-width: 900px) {
+  #stories::before {
+    background:
+      linear-gradient(180deg, #050505 0px, rgba(5,5,5,0.7) 90px, rgba(5,5,5,0.74) 300px, #050505 500px, #050505 100%),
+      url('../img/open-scripture.jpg') 45% top / auto 520px no-repeat;
+  }
+}
