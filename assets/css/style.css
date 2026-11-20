@@ -789,3 +789,12 @@ h1, h2, h3, h4 {
   .section { padding: 80px var(--pad); }
   .hero { padding-top: 130px; }
 }
+
+/* Mobile: sections already have side padding, so drop the container's second
+   layer of padding. Keeps every section on the same margins as the hero, and
+   stops anything from pushing the page sideways. */
+html, body { overflow-x: hidden; overflow-x: clip; max-width: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (max-width: 880px) {
+  .section > .container,
+  .cta-section > .container { padding-left: 0; padding-right: 0; }
+}
