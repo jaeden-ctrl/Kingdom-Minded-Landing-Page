@@ -564,3 +564,25 @@
       url('../img/open-scripture.jpg') 45% top / auto 520px no-repeat;
   }
 }
+
+/* ---------- Hero: people praying at sunrise, kept quiet behind the text ----------
+   The scene sits to the right (behind the Next Call card); the left side,
+   where the headline is, stays nearly black. */
+.prayer-hero {
+  background:
+    linear-gradient(90deg, #050505 0%, rgba(5,5,5,0.96) 34%, rgba(5,5,5,0.7) 56%, rgba(5,5,5,0.42) 78%, rgba(5,5,5,0.5) 100%),
+    linear-gradient(180deg, rgba(5,5,5,0.8) 0%, rgba(5,5,5,0.2) 28%, rgba(5,5,5,0.25) 70%, #050505 100%),
+    url('../img/prayer-circle.jpg') 30% 70% / auto 100% no-repeat,
+    #050505;
+  background-position: 0 0, 0 0, right 0 bottom 0, 0 0;
+}
+.prayer-hero::before { opacity: 0.4; }
+.prayer-hero .next-call { background: rgba(8,8,7,0.8); backdrop-filter: blur(6px); }
+@media (max-width: 880px) {
+  .prayer-hero {
+    background:
+      linear-gradient(180deg, rgba(5,5,5,0.88) 0px, rgba(5,5,5,0.8) 120px, rgba(5,5,5,0.82) 380px, #050505 600px, #050505 100%),
+      url('../img/prayer-circle.jpg') 60% 0 / auto 620px no-repeat,
+      #050505;
+  }
+}
