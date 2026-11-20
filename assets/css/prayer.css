@@ -606,3 +606,63 @@
    so the wordmark is readable and the two line up on the left */
 .footer-host { flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--line-on-black); max-width: 260px; }
 .footer-host img { height: 86px; width: auto; }
+
+/* ============================================================
+   Mobile: centered layout + guard against sideways shift in Safari
+   ============================================================ */
+html, body { overflow-x: hidden; overflow-x: clip; max-width: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+@media (max-width: 880px) {
+  .prayer-page main, .prayer-page section, .prayer-page header.hero { text-align: center; }
+
+  /* Labels: line on both sides, centered */
+  .prayer-page .eyebrow, .prayer-page .hero-sub { justify-content: center; text-align: center; }
+  .prayer-page .eyebrow::before { content: ''; display: block; width: 46px; height: 1px; background: var(--gold-dim); flex-shrink: 0; }
+  .prayer-page .hero-sub { flex-wrap: nowrap; }
+  .prayer-page .hero-sub::after { content: ''; width: 40px; height: 1px; background: var(--gold-dim); flex-shrink: 0; }
+
+  /* Headings, paragraphs, rules */
+  .prayer-page .section-title,
+  .prayer-page .lede,
+  .prayer-page .closer-line,
+  .prayer-page .hero-hook,
+  .prayer-page .host-bridge,
+  .prayer-page h1, .prayer-page h2 { margin-left: auto; margin-right: auto; }
+  .prayer-page .section-rule { margin-left: auto; margin-right: auto; }
+  .prayer-page .hero-ctas { justify-content: center; }
+  .prayer-page .text-link { display: inline-flex; }
+
+  /* Cards and lists */
+  .prayer-page .pray-item .pillar-icon { margin-left: auto; margin-right: auto; }
+  .prayer-page .rhythm-step { grid-template-columns: 1fr; gap: 6px; justify-items: center; }
+  .prayer-page .rhythm-step p { margin: 0 auto; }
+  .prayer-page .role-chips { justify-content: center; }
+  .prayer-page .lend-label { text-align: center; }
+  .prayer-page .first-time { margin-left: auto; margin-right: auto; }
+  .prayer-page .first-time ul { display: inline-block; text-align: left; }
+  .prayer-page .declare-item cite { text-align: center; }
+
+  /* Next Call card and Zoom card stay readable as tables, centered on the page */
+  .prayer-page .next-call { margin-left: auto; margin-right: auto; text-align: left; }
+  .prayer-page .next-call-label, .prayer-page .join-card-top { justify-content: flex-start; }
+  .prayer-page .join-card { text-align: left; }
+
+  /* Hosted by: photos centered */
+  .prayer-page .host-section .leaders-photos { justify-self: center; margin-left: auto; margin-right: auto; }
+  .prayer-page .host-logo { margin-left: auto; margin-right: auto; }
+
+  /* Footer */
+  .prayer-page .footer-top { flex-direction: column; align-items: center; text-align: center; }
+  .prayer-page .footer-brand { margin: 0 auto; }
+  .prayer-page .footer-host { align-items: center; margin-left: auto; margin-right: auto; }
+  .prayer-page .footer-cols { justify-content: center; text-align: center; width: 100%; }
+  .prayer-page .footer-bottom { flex-direction: column; text-align: center; }
+
+  .prayer-page .hero-scroll { display: none; }
+}
+@media (max-width: 880px) {
+  .prayer-page .first-time ul { display: block; text-align: center; }
+  .prayer-page .first-time li { padding-left: 0; }
+  .prayer-page .first-time li::before { display: none; }
+  .prayer-page .text-link { justify-content: center; text-align: center; gap: 8px; }
+}
