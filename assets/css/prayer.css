@@ -490,8 +490,8 @@
 }
 .join-section::before {
   background:
-    linear-gradient(180deg, #050505 0%, rgba(5,5,5,0.35) 20%, rgba(5,5,5,0.25) 62%, rgba(5,5,5,0.85) 88%, #050505 100%),
-    linear-gradient(100deg, rgba(3,3,3,0.94) 12%, rgba(3,3,3,0.62) 52%, rgba(3,3,3,0.4) 100%);
+    linear-gradient(180deg, #050505 0%, rgba(5,5,5,0.6) 20%, rgba(5,5,5,0.52) 62%, rgba(5,5,5,0.88) 88%, #050505 100%),
+    linear-gradient(100deg, rgba(3,3,3,0.95) 12%, rgba(3,3,3,0.72) 52%, rgba(3,3,3,0.58) 100%);
 }
 @media (max-width: 980px) {
   .join-section { background-position: 60% top; background-size: auto 62%; background-repeat: no-repeat; }
