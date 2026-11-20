@@ -527,3 +527,21 @@
       url('../img/stone-chapel.jpg') 68% 40% / cover no-repeat;
   }
 }
+
+/* ---------- "A way in the wilderness": desert path and river, dimmed and faded ---------- */
+.verse-feature { isolation: isolate; }
+.verse-feature::after {
+  content: '';
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, #050505 0%, rgba(5,5,5,0.62) 22%, rgba(5,5,5,0.55) 60%, rgba(5,5,5,0.85) 86%, #050505 100%),
+    radial-gradient(ellipse 60% 55% at 50% 50%, rgba(5,5,5,0.55), rgba(5,5,5,0.15) 75%),
+    url('../img/wilderness-river.jpg') center 55% / cover no-repeat;
+}
+@media (max-width: 900px) {
+  .verse-feature::after {
+    background:
+      linear-gradient(180deg, #050505 0%, rgba(5,5,5,0.76) 18%, rgba(5,5,5,0.72) 74%, #050505 100%),
+      url('../img/wilderness-river.jpg') 58% 55% / cover no-repeat;
+  }
+}
