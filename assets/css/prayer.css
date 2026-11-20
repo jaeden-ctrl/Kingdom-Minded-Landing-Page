@@ -601,3 +601,8 @@
   .prayer-page .section > .container,
   .prayer-page .cta-section > .container { padding-left: 0; padding-right: 0; }
 }
+
+/* Footer "Hosted by" + Revival logo: stack the label above a larger logo
+   so the wordmark is readable and the two line up on the left */
+.footer-host { flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--line-on-black); max-width: 260px; }
+.footer-host img { height: 86px; width: auto; }
