@@ -666,3 +666,40 @@ html, body { overflow-x: hidden; overflow-x: clip; max-width: 100%; -webkit-text
   .prayer-page .first-time li::before { display: none; }
   .prayer-page .text-link { justify-content: center; text-align: center; gap: 8px; }
 }
+
+/* ============================================================
+   Mobile overflow hardening (iOS Safari / Chrome on iPhone)
+   WebKit can size flex/grid items to their unwrapped text width,
+   which made the layout wider than the screen. On phones:
+   - labels and the Explore link are plain blocks (no flex) so text always wraps
+   - every grid column is allowed to shrink to the screen
+   - nothing can be wider than its container
+   ============================================================ */
+@media (max-width: 880px) {
+  .prayer-page .eyebrow,
+  .prayer-page .hero-sub { display: block; text-align: center; line-height: 1.9; }
+  .prayer-page .eyebrow::before,
+  .prayer-page .eyebrow::after,
+  .prayer-page .hero-sub::before,
+  .prayer-page .hero-sub::after {
+    content: ''; display: inline-block; vertical-align: middle;
+    width: 28px; height: 1px; background: var(--gold-dim); margin: 0 12px; flex-shrink: 0;
+  }
+  .prayer-page .text-link { display: inline-block; text-align: center; }
+
+  .prayer-page .prayer-hero-grid,
+  .prayer-page .split,
+  .prayer-page .invite-head,
+  .prayer-page .stories-head,
+  .prayer-page .cta-grid,
+  .prayer-page .leaders-grid,
+  .prayer-page .host-grid { grid-template-columns: minmax(0, 1fr); }
+
+  .prayer-page section *, .prayer-page header.hero *, .prayer-page .footer * { min-width: 0; max-width: 100%; }
+  .prayer-page .btn { white-space: normal; text-align: center; }
+  .prayer-page .hero-inner, .prayer-page .next-call, .prayer-page .cta-copy, .prayer-page .form-card { width: 100%; }
+  .prayer-page h1, .prayer-page h2, .prayer-page h3, .prayer-page h4, .prayer-page p, .prayer-page li, .prayer-page a { overflow-wrap: break-word; }
+
+  /* Nav: logo and menu button always fit */
+  .prayer-page .nav { left: 0; right: 0; width: 100%; max-width: 100vw; }
+}
