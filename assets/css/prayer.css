@@ -586,3 +586,11 @@
       #050505;
   }
 }
+
+/* Mobile hero: give the subtitle and intro paragraph more room below the verse */
+@media (max-width: 880px) {
+  .prayer-hero .verse-title-cite { margin-top: 18px; }
+  .prayer-hero .hero-subtitle { margin: 72px 0 22px; padding-top: 30px; border-top: 1px solid var(--line-on-black); }
+  .prayer-hero .hero-hook { line-height: 1.75; margin-bottom: 44px; }
+  .prayer-hero .hero-ctas { gap: 14px; }
+}
