@@ -499,3 +499,24 @@
     background: linear-gradient(180deg, #050505 0%, rgba(5,5,5,0.55) 14%, rgba(5,5,5,0.7) 40%, #050505 62%);
   }
 }
+
+/* ---------- "If This Is You": quiet chapel light behind the section ----------
+   Heavy dark wash so the image reads as atmosphere, faded fully into the
+   panel color at the top and bottom edges. */
+#if-this-is-you { overflow: hidden; isolation: isolate; }
+#if-this-is-you::before {
+  content: '';
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, #0b0b0b 0%, rgba(11,11,11,0.80) 22%, rgba(11,11,11,0.74) 60%, rgba(11,11,11,0.86) 82%, #0b0b0b 100%),
+    linear-gradient(90deg, rgba(11,11,11,0.92) 0%, rgba(11,11,11,0.55) 55%, rgba(11,11,11,0.70) 100%),
+    url('../img/chapel-light.jpg') center 38% / cover no-repeat;
+  filter: saturate(0.75);
+}
+@media (max-width: 900px) {
+  #if-this-is-you::before {
+    background:
+      linear-gradient(180deg, #0b0b0b 0%, rgba(11,11,11,0.82) 20%, rgba(11,11,11,0.80) 70%, #0b0b0b 100%),
+      url('../img/chapel-light.jpg') center 30% / cover no-repeat;
+  }
+}
